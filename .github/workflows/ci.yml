@@ -27,4 +27,4 @@ jobs:
         run: npx surge --project ./build --domain orange-passenger.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: $ {{ secrets.SURGE_TOKEN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
