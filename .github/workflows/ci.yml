@@ -47,6 +47,11 @@ jobs:
         with:
           name: build
           path: build
+      - name: ZIP Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          zip -r build.zip ./build
+          zip -r coverage.zip ./coverage
       - name: Deploy to staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain orange-passenger.surge.sh
