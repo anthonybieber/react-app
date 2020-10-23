@@ -1,9 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, master]
   push:
-    branches: [develop]
+    branches: [develop, master]
 
 jobs:
   build:
@@ -59,3 +59,8 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: "New feature deployed to qa: http://orange-passenger.surge.sh/"
+      - name: Create a Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
